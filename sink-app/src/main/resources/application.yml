@@ -1,10 +1,16 @@
 spring:
   cloud:
     stream:
-      function:
-        definition: consumer
       bindings:
         consumer-in-0:
+          consumer:
+            instance-count: 1
+            concurrency: 10
           destination: comm-topic
-#      poller:
-#        fixed-delay: 500
+          group: test-group
+      rabbit:
+        bindings:
+          consumer-in-0:
+            consumer:
+              container-type: STREAM
+              super-stream: true

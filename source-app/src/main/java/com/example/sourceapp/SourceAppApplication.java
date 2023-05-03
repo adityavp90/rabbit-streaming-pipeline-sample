@@ -3,8 +3,9 @@ package com.example.sourceapp;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
 
-import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 @SpringBootApplication
@@ -15,12 +16,14 @@ public class SourceAppApplication {
 	}
 	private int count=0;
 
-
 	@Bean
-	public Supplier<String> supplier() {
+	public Supplier<Message<String>> supplier() {
 		return () -> {
-			String message = "message "+count++;
-			System.out.println("Sending value: " + message);
+			int newCount = count++;
+			String messageString = "message " + newCount;
+			Message<String> message = MessageBuilder.withPayload(messageString)
+				.setHeader("partition_key",newCount).build();
+			System.out.println("Sending payload: " + message.getPayload());
 			return message;
 		};
 	}

@@ -3,6 +3,7 @@ package com.example.sinkapp;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.messaging.Message;
 
 import java.util.function.Consumer;
 
@@ -14,9 +15,9 @@ public class SinkAppApplication {
     }
 
     @Bean
-	public Consumer<String> consumer() {
+	public Consumer<Message<String>> consumer() {
 		return message -> {
-			System.out.println("Received message " + message);
+			System.out.println("Received message with partition key: " + message.getHeaders().get("partition_key"));
 		};
 	}
 }
