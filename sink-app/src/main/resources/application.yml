@@ -1,0 +1,10 @@
+spring:
+  cloud:
+    stream:
+      function:
+        definition: consumer
+      bindings:
+        consumer-in-0:
+          destination: comm-topic
+#      poller:
+#        fixed-delay: 500
