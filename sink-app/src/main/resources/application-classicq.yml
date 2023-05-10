@@ -1,0 +1,7 @@
+spring:
+  cloud:
+    stream:
+      bindings:
+        consumer-in-0:
+          destination: comm-topic-classic
+          group: test-group

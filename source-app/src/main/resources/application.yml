@@ -2,22 +2,5 @@ server:
   port: 8081
 
 spring:
-  cloud:
-    stream:
-      function:
-        definition: supplier
-      bindings:
-        supplier-out-0:
-          destination: comm-topic
-          producer:
-            partition-key-expression: headers['partition_key']
-            partition-count: 10
-      rabbit:
-        bindings:
-          supplier-out-0:
-            producer:
-              producer-type: stream-async
-              super-stream: true
-              declare-exchange: false
-      poller:
-        fixed-delay: 500
+  profiles:
+    active: streamq

@@ -1,16 +1,3 @@
 spring:
-  cloud:
-    stream:
-      bindings:
-        consumer-in-0:
-          consumer:
-            instance-count: 1
-            concurrency: 10
-          destination: comm-topic
-          group: test-group
-      rabbit:
-        bindings:
-          consumer-in-0:
-            consumer:
-              container-type: STREAM
-              super-stream: true
+  profiles:
+    active: streamq
