@@ -1,0 +1,18 @@
+spring:
+  cloud:
+    stream:
+      bindings:
+        consumer-in-0:
+          destination: comm-topic-classic-batch
+          group: test-group
+          consumer:
+            batch-mode: true
+#            instance-count: 1
+#            concurrency: 4
+      rabbit:
+        bindings:
+          consumer-in-0:
+            consumer:
+              enable-batching: true
+              batch-size: 10
+              receive-timeout: 5000
