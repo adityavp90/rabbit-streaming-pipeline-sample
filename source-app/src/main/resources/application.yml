@@ -3,4 +3,4 @@ server:
 
 spring:
   profiles:
-    active: classicq-batch-partitioned
+    active: classicq-batch-partitioned-manack

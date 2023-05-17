@@ -1,0 +1,19 @@
+server:
+  port: 8081
+
+spring:
+  cloud:
+    stream:
+      function:
+        definition: supplier
+      bindings:
+        supplier-out-0:
+          destination: classicq-batch-partitioned-manack-topic
+          producer:
+#            partitioned: true
+            partition-key-expression: headers['partition_key']
+            partition-count: 4
+            required-groups:
+              - test-group
+      poller:
+        fixed-delay: 500
