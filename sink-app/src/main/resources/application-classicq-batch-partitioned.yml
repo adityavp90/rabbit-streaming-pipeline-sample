@@ -1,0 +1,22 @@
+spring:
+  cloud:
+    stream:
+      bindings:
+        consumer-in-0:
+          destination: classicq-batch-partitioned-topic
+          group: test-group
+          consumer:
+            batch-mode: true
+            partitioned: true
+            instance-index-list:
+              - 0
+              - 1
+              - 2
+              - 3
+      rabbit:
+        bindings:
+          consumer-in-0:
+            consumer:
+              enable-batching: true
+              batch-size: 10
+              receive-timeout: 5000

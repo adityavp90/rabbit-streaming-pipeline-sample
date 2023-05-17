@@ -14,7 +14,7 @@ import java.util.function.Consumer;
 public class BatchMessageConsumer {
 
     @Bean
-    @Profile({"classicq-batch"})
+    @Profile({"classicq-batch", "classicq-batch-partitioned"})
     public Consumer<Message<List<String>>> consumer() {
         return message -> {
             List<Map<String, Object>> headers = (List<Map<String, Object>>) message.getHeaders().get(AmqpInboundChannelAdapter.CONSOLIDATED_HEADERS);
