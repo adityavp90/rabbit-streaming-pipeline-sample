@@ -3,5 +3,5 @@ spring:
     stream:
       bindings:
         consumer-in-0:
-          destination: comm-topic-classic
+          destination: classicq-topic
           group: test-group

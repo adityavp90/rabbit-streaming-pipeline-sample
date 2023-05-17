@@ -8,7 +8,7 @@ spring:
         definition: supplier
       bindings:
         supplier-out-0:
-          destination: comm-topic-classic-batch
+          destination: classicq-batch-topic
 #          producer:
 #            partition-key-expression: headers['partition_key']
 #            partition-count: 4

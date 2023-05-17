@@ -8,6 +8,6 @@ spring:
         definition: supplier
       bindings:
         supplier-out-0:
-          destination: comm-topic-classic
+          destination: classicq-topic
       poller:
         fixed-delay: 500

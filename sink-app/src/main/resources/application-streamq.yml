@@ -6,7 +6,7 @@ spring:
           consumer:
             instance-count: 1
             concurrency: 4
-          destination: comm-topic-stream
+          destination: streamq-topic
           group: test-group
       rabbit:
         bindings:

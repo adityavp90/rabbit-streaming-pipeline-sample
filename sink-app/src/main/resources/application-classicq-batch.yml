@@ -3,7 +3,7 @@ spring:
     stream:
       bindings:
         consumer-in-0:
-          destination: comm-topic-classic-batch
+          destination: classicq-batch-topic
           group: test-group
           consumer:
             batch-mode: true
