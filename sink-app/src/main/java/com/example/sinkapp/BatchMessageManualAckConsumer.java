@@ -1,6 +1,7 @@
 package com.example.sinkapp;
 
 import com.rabbitmq.client.Channel;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.support.AmqpHeaders;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +15,7 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 @Configuration
+@Slf4j
 public class BatchMessageManualAckConsumer {
 
     @Bean
@@ -22,13 +24,13 @@ public class BatchMessageManualAckConsumer {
         return message -> {
             Channel channel = message.getHeaders().get(AmqpHeaders.CHANNEL, Channel.class);
             Long deliveryTag = message.getHeaders().get(AmqpHeaders.DELIVERY_TAG, Long.class);
-            System.out.println("Batch Delivery Tag = " + deliveryTag);
+            log.info("Batch Delivery Tag = " + deliveryTag);
             try {
                 List<Map<String, Object>> headers = (List<Map<String, Object>>) message.getHeaders().get(AmqpInboundChannelAdapter.CONSOLIDATED_HEADERS);
-                System.out.println("Consolidated batch headers size: "+ headers.size());
-                System.out.println("Header Partition Keys");
+                log.info("Consolidated batch headers size: "+ headers.size());
+                log.info("Header Partition Keys");
                 headers.stream().map(stringObjectMap -> stringObjectMap.get("partition_key")).forEach(System.out::println);
-                System.out.println("Header Delivery Tag Keys");
+                log.info("Header Delivery Tag Keys");
                 headers.stream().map(stringObjectMap -> stringObjectMap.get(AmqpHeaders.DELIVERY_TAG)).forEach(System.out::println);
                 channel.basicAck(deliveryTag, true);
             } catch (IOException e) {

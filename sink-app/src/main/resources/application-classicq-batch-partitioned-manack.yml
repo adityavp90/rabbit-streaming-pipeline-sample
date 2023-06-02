@@ -20,4 +20,5 @@ spring:
               enable-batching: true
               batch-size: 10
               receive-timeout: 5000
+              prefetch: 10
               acknowledge-mode: manual

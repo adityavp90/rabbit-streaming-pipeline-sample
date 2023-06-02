@@ -16,4 +16,4 @@ spring:
             required-groups:
               - test-group
       poller:
-        fixed-delay: 500
+        fixed-delay: 100
